@@ -1,0 +1,21 @@
+# Segredos (NUNCA versionar)
+.env
+.streamlit/secrets.toml
+
+# Ambiente virtual
+.venv/
+venv/
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# Banco local
+data/*.sqlite
+data/*.sqlite-journal
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
