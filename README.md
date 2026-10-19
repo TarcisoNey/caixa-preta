@@ -10,11 +10,11 @@ Sprint 3 — Multimodalidade (Visão + Áudio Whisper) · DataLakers + Navi Hub 
 
 ## Integrantes
 
-| Nome | Papel hoje (rotativo) |
-| --- | --- |
-| Maria Eduarda Melloni | _a definir_ |
-| _(integrante 2)_ | _a definir_ |
-| _(integrante 3)_ | _a definir_ |
+| Nome |
+| --- | 
+| Ana Cristina Schmitd |  |
+| Tarciso Mota Ney da Silva | 
+
 
 Papéis: **Piloto** (teclado) · **Copiloto** (revisão e testes em tempo real) · **Arquiteto** (documentação e consistência dos contratos).
 
