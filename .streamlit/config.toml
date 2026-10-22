@@ -1,0 +1,31 @@
+# Tokens do design "Caixa Preta · Conversação" (Figma). As mesmas cores estão em
+# src/ui/tema.css como variáveis CSS; ao mudar uma, mude a outra.
+
+[server]
+# Serve static/ em app/static/ (ícones do design)
+enableStaticServing = true
+
+[theme]
+base = "dark"
+primaryColor = "#f2b552"
+backgroundColor = "#0c0f11"
+secondaryBackgroundColor = "#141719"
+textColor = "#c8cdd1"
+borderColor = "#252b2f"
+linkColor = "#f2b552"
+linkUnderline = false
+codeBackgroundColor = "#1e2428"
+codeTextColor = "#c8cdd1"
+baseRadius = "6px"
+buttonRadius = "6px"
+baseFontSize = 14
+showWidgetBorder = true
+showSidebarBorder = true
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap, sans-serif"
+headingFont = "Inter, sans-serif"
+codeFont = "IBM Plex Mono:https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap, monospace"
+
+[theme.sidebar]
+backgroundColor = "#0a0d0f"
+secondaryBackgroundColor = "#141719"
+borderColor = "#252b2f"

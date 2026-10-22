@@ -19,6 +19,10 @@ DOMINIO = "Auditoria de Infraestrutura e TI (prints de cloud + audios de inciden
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip() or "gemini-3.8-flash"
 TIMEOUT_MS = 30_000
 
+# Modelo local do Whisper: "tiny" erra muito em portugues; "small" acerta termos tecnicos
+# e numeros (~1-2s por audio curto em CPU). Opcoes: tiny, base, small, medium.
+WHISPER_MODEL = os.environ.get("WHISPER_MODEL", "small").strip() or "small"
+
 
 def criar_cliente_gemini() -> genai.Client:
     """Carrega as variaveis de ambiente e instancia o cliente oficial com timeout estrito.
@@ -43,6 +47,11 @@ def criar_cliente_gemini() -> genai.Client:
     )
 
 
+def chave_configurada() -> bool:
+    """Informa se ha GEMINI_API_KEY no ambiente, sem expor o valor (usado pela UI)."""
+    return bool(os.environ.get("GEMINI_API_KEY", "").strip())
+
+
 def obter_status_configuracao(nome_squad: str = NOME_SQUAD) -> str:
     """Resume a configuracao ativa sem expor a chave de API.
 
@@ -52,8 +61,7 @@ def obter_status_configuracao(nome_squad: str = NOME_SQUAD) -> str:
     Returns:
         Linha de status com squad, modelo, timeout e se a chave esta presente.
     """
-    chave_presente = bool(os.environ.get("GEMINI_API_KEY", "").strip())
-    status_chave = "configurada" if chave_presente else "AUSENTE"
+    status_chave = "configurada" if chave_configurada() else "AUSENTE"
     return (
         f"Squad '{nome_squad}' | Dominio: {DOMINIO} | Modelo: {MODEL} | "
         f"Timeout: {TIMEOUT_MS}ms | GEMINI_API_KEY: {status_chave}"

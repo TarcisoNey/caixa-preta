@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 import whisper
 from whisper.model import Whisper
+from src.core.config import WHISPER_MODEL
 from src.core.contracts import EvidenciaMultimodal, SegmentoFala
 
 EXTENSOES_SUPORTADAS = {".wav", ".mp3", ".ogg", ".m4a"}
@@ -17,8 +18,8 @@ CONTEXTO_DOMINIO = (
 
 @lru_cache(maxsize=1)
 def carregar_modelo_whisper() -> Whisper:
-    print("Iniciando instancia do Whisper tiny na CPU...")
-    return whisper.load_model("tiny", device="cpu")
+    print(f"Iniciando instancia do Whisper {WHISPER_MODEL} na CPU...")
+    return whisper.load_model(WHISPER_MODEL, device="cpu")
 
 def processar_audio(caminho: Path) -> EvidenciaMultimodal:
     """Valida o audio localmente e extrai a transcricao com segmentos temporais."""

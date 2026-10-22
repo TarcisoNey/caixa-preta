@@ -1,0 +1,250 @@
+/* Tokens do design "Caixa Preta · Conversação" (Figma). Espelham .streamlit/config.toml. */
+:root {
+  --cp-fundo: #0c0f11;
+  --cp-lateral: #0a0d0f;
+  --cp-superficie: #141719;
+  --cp-superficie-ativa: #1c1f22;
+  --cp-poco: #0e1113;
+  --cp-borda: #1e2428;
+  --cp-borda-forte: #252b2f;
+  --cp-chip: #1e2428;
+  --cp-chip-borda: #2a3038;
+  --cp-texto-forte: #eff1ef;
+  --cp-texto: #c8cdd1;
+  --cp-texto-suave: #7a8490;
+  --cp-texto-apagado: #555e66;
+  --cp-texto-minimo: #3a4048;
+  --cp-destaque: #f2b552;
+  --cp-destaque-fundo: #30291e;
+  --cp-destaque-borda: #3d2e1a;
+  --cp-destaque-poco: #1a1610;
+  --cp-sucesso: #93b9a9;
+  --cp-onda-inativa: #818c94;
+  /* Fora do Figma: tom para divergencia entre fontes, que o design nao cobre */
+  --cp-alerta: #e8846f;
+  --cp-alerta-fundo: #2c1b17;
+  --cp-alerta-borda: #4a2a22;
+  --cp-alerta-poco: #1b1311;
+  --cp-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --cp-raio-cartao: 10px;
+  --cp-raio: 6px;
+  --cp-raio-pill: 4px;
+  --cp-raio-chip: 3px;
+}
+
+/* ---------- Estrutura da pagina ---------- */
+.stApp { background: var(--cp-fundo); }
+[data-testid="stHeader"] { background: transparent; }
+[data-testid="stMainBlockContainer"] {
+  max-width: 1040px;
+  padding: 3.25rem 2rem 1rem;
+}
+[data-testid="stSidebar"] { background: var(--cp-lateral); border-right: 1px solid var(--cp-borda); }
+[data-testid="stSidebarUserContent"] { padding-top: 0.5rem; }
+[data-testid="stBottom"] > div { background: var(--cp-fundo); }
+.cp-icone { display: block; flex-shrink: 0; }
+
+/* ---------- Tipografia utilitaria ---------- */
+.cp-eyebrow {
+  font-family: var(--cp-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--cp-texto-apagado);
+  text-transform: uppercase;
+}
+
+/* ---------- Barra lateral ---------- */
+.cp-logo { display: flex; align-items: center; gap: 10px; padding: 0 0 20px 4px; }
+.cp-logo-nome { font-size: 15px; font-weight: 700; color: var(--cp-texto-forte); line-height: 1.2; }
+.cp-logo-sub { font-family: var(--cp-mono); font-size: 8px; color: var(--cp-texto-apagado); margin-top: 2px; }
+.cp-squad {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--cp-superficie); border-radius: var(--cp-raio); padding: 8px 10px;
+}
+.cp-squad-avatar {
+  display: flex; align-items: center; justify-content: center; width: 24px; height: 24px;
+  border-radius: var(--cp-raio-pill); background: var(--cp-borda-forte);
+  color: var(--cp-texto-forte); font-size: 10px; font-weight: 600;
+}
+.cp-squad-nome { font-size: 12px; font-weight: 500; color: var(--cp-texto); line-height: 1.3; }
+.cp-squad-sub { font-family: var(--cp-mono); font-size: 9px; color: var(--cp-texto-apagado); }
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] li { font-size: 12px; line-height: 1.5; color: var(--cp-texto-suave); }
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] { font-size: 11px; color: var(--cp-texto-suave); }
+.cp-lista { display: flex; flex-direction: column; gap: 6px; }
+.cp-lista-vazia { font-size: 11px; color: var(--cp-texto-apagado); padding: 2px 0; }
+
+/* Item da lista lateral: uma estrutura, duas variantes */
+.cp-item { display: flex; flex-direction: column; gap: 4px; border-radius: var(--cp-raio); padding: 10px; border: 1px solid transparent; }
+.cp-item--ativo { background: var(--cp-superficie); border-color: var(--cp-borda-forte); }
+.cp-item-topo { display: flex; align-items: center; gap: 6px; }
+.cp-item-tipo { font-family: var(--cp-mono); font-size: 9px; color: var(--cp-texto-apagado); }
+.cp-item-nome { font-size: 12px; font-weight: 500; color: var(--cp-texto); line-height: 1.4; word-break: break-word; }
+.cp-item-meta { font-size: 10px; color: var(--cp-texto-apagado); }
+.cp-item--inativo .cp-item-nome { color: var(--cp-texto-apagado); font-weight: 400; }
+
+/* ---------- Chips, pills e indicadores ---------- */
+.cp-chip {
+  display: inline-block; font-family: var(--cp-mono); font-size: 9px; line-height: 1.3;
+  padding: 2px 5px; border-radius: var(--cp-raio-chip);
+  background: var(--cp-chip); border: 1px solid var(--cp-chip-borda); color: var(--cp-texto-suave);
+}
+.cp-chip--destaque { background: var(--cp-destaque-fundo); border-color: var(--cp-destaque-borda); color: var(--cp-destaque); }
+.cp-badge {
+  font-size: 10px; padding: 2px 7px; border-radius: var(--cp-raio-pill);
+  background: var(--cp-chip); color: var(--cp-texto-suave);
+}
+/* Pill = estado da investigacao */
+.cp-pill {
+  display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+  padding: 2px 7px; border-radius: var(--cp-raio-pill); font-size: 10px; font-weight: 500;
+}
+.cp-pill::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+.cp-pill--neutro { background: var(--cp-chip); color: var(--cp-texto-suave); }
+.cp-pill--analise { background: var(--cp-destaque-fundo); color: var(--cp-destaque); }
+.cp-pill--alerta { background: var(--cp-alerta-fundo); color: var(--cp-alerta); }
+/* Indicador = estado de sistema (sem fundo, nao confundir com a pill) */
+.cp-indicador { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; white-space: nowrap; }
+.cp-indicador::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.cp-indicador--ok { color: var(--cp-sucesso); }
+.cp-indicador--atencao { color: var(--cp-destaque); }
+
+/* ---------- Topbar e cabecalho ---------- */
+.st-key-topbar {
+  border-bottom: 1px solid var(--cp-borda);
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+.cp-topbar { display: flex; align-items: center; gap: 10px; min-height: 32px; }
+.cp-crumb { font-size: 13px; color: var(--cp-texto-suave); }
+.cp-crumb-id { font-family: var(--cp-mono); font-size: 11px; color: var(--cp-texto-forte); }
+.st-key-relatorio button p::before {
+  content: ""; display: inline-block; width: 13px; height: 13px; margin-right: 7px; vertical-align: -2px;
+  background: url("app/static/icones/relatorio.svg") center / contain no-repeat;
+}
+[data-testid="stBaseButton-primary"],
+[data-testid="stBaseButton-primary"] p { color: var(--cp-fundo); font-weight: 600; }
+[data-testid="stBaseButton-primary"]:disabled { background: var(--cp-superficie); border-color: var(--cp-borda-forte); }
+[data-testid="stBaseButton-primary"]:disabled p { color: var(--cp-texto-apagado); }
+.st-key-relatorio button:disabled p::before { opacity: 0.35; filter: invert(1); }
+.cp-cabecalho { display: flex; flex-direction: column; gap: 6px; padding: 8px 0 4px; }
+.cp-titulo {
+  font-size: 26px !important; font-weight: 700 !important; line-height: 1.2 !important;
+  color: var(--cp-texto-forte) !important; margin: 0 !important; padding: 0 !important;
+}
+.cp-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  font-family: var(--cp-mono); font-size: 10px; color: var(--cp-texto-apagado);
+}
+.cp-meta .cp-indicador { font-family: inherit; font-size: 11px; }
+.cp-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--cp-texto-apagado); }
+
+/* ---------- Cartao (st.container com key "cartao-...") ---------- */
+[class*="st-key-cartao-"] {
+  background: var(--cp-superficie);
+  border: 1px solid var(--cp-borda);
+  border-radius: var(--cp-raio-cartao);
+  padding: 0 20px;
+  gap: 12px !important;
+  overflow: hidden;
+}
+.cp-cartao-topo {
+  display: flex; align-items: center; gap: 9px;
+  margin: 0 -20px; padding: 16px 20px 14px; border-bottom: 1px solid var(--cp-borda);
+}
+.cp-cartao-titulo { font-size: 14px; font-weight: 600; color: var(--cp-texto-forte); white-space: nowrap; }
+.cp-espaco { flex: 1; }
+.cp-cartao-direita {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--cp-mono); font-size: 10px; color: var(--cp-texto-apagado); white-space: nowrap;
+}
+.cp-cartao-direita--destaque { color: var(--cp-destaque); font-family: inherit; }
+.cp-cartao-rodape {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 0 -20px; padding: 10px 20px; border-top: 1px solid var(--cp-borda);
+  font-size: 11px; color: var(--cp-texto-apagado);
+}
+.cp-cartao-rodape > span { display: inline-flex; align-items: center; gap: 6px; }
+.cp-rodape-mono { font-family: var(--cp-mono); font-size: 10px; }
+.cp-arquivo { font-family: var(--cp-mono); font-size: 10px; color: var(--cp-texto-apagado); word-break: break-all; padding-top: 4px; }
+/* Corpo da resposta da IA */
+[class*="st-key-cartao-resposta"] [data-testid="stMarkdownContainer"] p,
+[class*="st-key-cartao-resposta"] [data-testid="stMarkdownContainer"] li { font-size: 14px; line-height: 1.65; color: var(--cp-texto); }
+.cp-leitura { font-size: 13px; line-height: 1.65; color: var(--cp-texto-suave); white-space: pre-wrap; margin: 0; }
+.cp-evidencias-usadas { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 11px; color: var(--cp-texto-apagado); }
+/* Expander dentro do cartao ("Ver raciocinio e fontes", "Ver transcricao completa") */
+[class*="st-key-cartao-"] [data-testid="stExpander"] details {
+  border: none; border-top: 1px solid var(--cp-borda); border-radius: 0;
+  margin: 0 -20px; width: calc(100% + 40px); background: transparent;
+}
+/* "Ver raciocinio e fontes" encosta no rodape do cartao, sem o espaco do gap */
+[class*="st-key-cartao-resposta"] [data-testid="stExpander"] details { margin-top: -12px; }
+[class*="st-key-cartao-"] [data-testid="stExpander"] summary { padding: 10px 20px; font-size: 11px; color: var(--cp-texto-suave); }
+[class*="st-key-cartao-"] [data-testid="stExpander"] summary p { font-size: 11px; }
+[class*="st-key-cartao-"] [data-testid="stExpanderDetails"] { padding: 0 20px 14px; }
+
+/* ---------- Callout ---------- */
+.cp-callout { border-left: 2px solid; border-radius: var(--cp-raio); padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; }
+.cp-callout--destaque { background: var(--cp-destaque-poco); border-color: var(--cp-destaque-borda); }
+.cp-callout--alerta { background: var(--cp-alerta-poco); border-color: var(--cp-alerta-borda); }
+.cp-callout-topo { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; }
+.cp-callout--destaque .cp-callout-topo { color: var(--cp-destaque); }
+.cp-callout--alerta .cp-callout-topo { color: var(--cp-alerta); }
+.cp-callout-rotulo { font-family: var(--cp-mono); font-size: 9px; letter-spacing: 0.04em; }
+.cp-callout p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--cp-texto); white-space: pre-wrap; }
+
+/* ---------- Audio: forma de onda e trechos ---------- */
+.cp-onda { background: var(--cp-poco); border-radius: 4px; height: 48px; padding: 0 8px; overflow: hidden; }
+.cp-onda-barras { position: relative; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+.cp-onda-barra { position: relative; flex: 0 1 3px; min-width: 1px; border-radius: 1px; background: var(--cp-onda-inativa); opacity: 0.45; }
+.cp-onda-barra--trecho { background: var(--cp-destaque); opacity: 1; }
+.cp-onda-trecho { position: absolute; top: 0; bottom: 0; background: var(--cp-destaque-fundo); }
+.cp-onda-cursor { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--cp-destaque); }
+[data-testid="stAudio"] { color-scheme: dark; border-radius: var(--cp-raio); }
+/* Cada trecho da transcricao e um botao: clicar leva o player e o destaque para aquele momento */
+[class*="st-key-trecho-"] button {
+  justify-content: flex-start; text-align: left;
+  padding: 7px 0; min-height: 0; border-radius: 0; border-bottom: 1px solid var(--cp-borda);
+}
+[class*="st-key-trecho-"] button > div { justify-content: flex-start; width: 100%; }
+[class*="st-key-trecho-"] button p { text-align: left; font-size: 13px; color: var(--cp-texto); line-height: 1.5; }
+[class*="st-key-trecho-"] button:hover p { color: var(--cp-texto-forte); }
+[class*="st-key-trecho-"] code {
+  background: none; padding: 0 12px 0 0; font-size: 11px; color: var(--cp-texto-apagado);
+}
+[class*="st-key-trecho-"][class*="-ativo"] code { color: var(--cp-destaque); }
+[class*="st-key-trecho-"][class*="-ativo"] button p { color: var(--cp-texto-forte); }
+
+/* ---------- Pergunta do usuario ---------- */
+.cp-pergunta { display: flex; flex-direction: column; gap: 6px; padding: 10px 0 2px; }
+.cp-pergunta-texto { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.4; color: var(--cp-texto-forte); white-space: pre-wrap; }
+
+/* ---------- Acordeao de evidencias ---------- */
+.st-key-acordeao-evidencias [data-testid="stExpander"] details,
+.st-key-acordeao-evidencias details {
+  background: var(--cp-superficie); border: 1px solid var(--cp-borda); border-radius: var(--cp-raio-cartao);
+}
+.st-key-acordeao-evidencias summary { padding: 14px 20px; }
+.st-key-acordeao-evidencias summary p { font-size: 14px; }
+.st-key-acordeao-evidencias [data-testid="stExpanderDetails"] { padding: 0; }
+.cp-linha {
+  display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-top: 1px solid var(--cp-borda);
+}
+.cp-linha-texto { flex: 1; min-width: 0; }
+.cp-linha-nome { font-size: 12px; font-weight: 500; color: var(--cp-texto); word-break: break-word; }
+.cp-linha-meta { font-size: 10px; color: var(--cp-texto-apagado); margin-top: 2px; }
+.cp-linha-hash { font-family: var(--cp-mono); font-size: 10px; color: var(--cp-texto-apagado); }
+.cp-linha--inativa .cp-linha-nome { color: var(--cp-texto-apagado); font-weight: 400; }
+.cp-custodia {
+  display: flex; align-items: center; gap: 6px; padding: 10px 20px; border-top: 1px solid var(--cp-borda);
+  font-size: 11px; color: var(--cp-texto-apagado);
+}
+
+/* ---------- Campo do chat ---------- */
+.cp-contexto {
+  display: flex; justify-content: space-between; gap: 12px; padding: 4px 2px 0;
+  font-family: var(--cp-mono); font-size: 9px; color: var(--cp-texto-minimo);
+}
+.cp-contexto span:last-child { font-family: inherit; }
+[data-testid="stChatInput"] { background: var(--cp-superficie); border: 1px solid var(--cp-borda-forte); border-radius: var(--cp-raio-cartao); }
+[data-testid="stChatInputSubmitButton"] { background: var(--cp-destaque); border-radius: var(--cp-raio); color: var(--cp-fundo); }
+[data-testid="stChatInputSubmitButton"] svg { fill: var(--cp-fundo); color: var(--cp-fundo); }

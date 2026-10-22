@@ -39,14 +39,23 @@ Os módulos não se conhecem entre si: conversam apenas pelos contratos de `src/
 │   │   └── agent.py        # loop agêntico com function calling no Gemini
 │   ├── vision/processor.py # análise de prints e diagramas (Gemini)
 │   ├── audio/processor.py  # transcrição de áudios (Whisper local)
-│   └── tools/local.py      # catálogo SQLite somente leitura + cálculos
+│   ├── tools/local.py      # catálogo SQLite somente leitura + cálculos
+│   └── ui/                 # camada visual do design "Caixa Preta · Conversação" (Figma)
+│       ├── tema.css        # tokens (cores, fontes, raios) + estilos dos componentes
+│       ├── componentes.py  # chip, pill, indicador, cartão, forma de onda, itens de evidência
+│       ├── registro.py     # IDs E01.., hash SHA-256 e cache das evidências da sessão
+│       ├── midia.py        # forma de onda dos áudios (wave/ffmpeg)
+│       └── relatorio.py    # relatório em Markdown do botão "Relatório"
+├── static/icones/          # ícones SVG exportados do Figma (servidos em app/static/)
+├── .streamlit/config.toml  # tema escuro com os mesmos tokens + static serving
 ├── data/                   # mídias de demonstração produzidas pelo trio
 ├── tests/
 │   ├── smoke_test_omni.py
 │   ├── test_resiliencia_config.py
 │   ├── test_resiliencia_ingestao.py
 │   ├── test_fluxo_completo.py
-│   └── test_resiliencia_ui.py
+│   ├── test_resiliencia_ui.py
+│   └── test_ui_componentes.py
 ├── app.py                  # interface Streamlit
 ├── .env.example
 ├── requirements.txt
@@ -88,15 +97,26 @@ python -m tests.test_resiliencia_ingestao # lazy loading, midia corrompida/silen
 python -m tests.test_fluxo_completo --offline # guardrails: SQL injection, banco read-only, allowlist de tools
 python -m tests.test_fluxo_completo       # guardrails + fluxo completo com o Gemini
 python -m tests.test_resiliencia_ui       # entradas vazias viram aviso amigável na UI
+python -m tests.test_ui_componentes       # camada visual: IDs, forma de onda, escape de HTML, relatório
 ```
 
-### Interface (v1.0)
+### Interface (design "Caixa Preta · Conversação")
 
 ```bash
 streamlit run app.py                      # abre em http://localhost:8501
 ```
 
-Na barra lateral, envie um print e/ou um áudio e pergunte no chat. Cada resposta traz o tempo, os turnos e os tokens. O painel **Auditoria de Ferramentas** mostra cada chamada ao catálogo com os argumentos e o resultado. Se o print e o áudio citarem valores diferentes, um aviso de divergência aparece acima do chat. Se a API falhar, o botão **Tentar novamente** reenvia a pergunta.
+Rode a partir da raiz do projeto: o tema (`.streamlit/config.toml`) e os ícones (`static/`) são lidos de lá.
+
+Há três formas de mandar evidências:
+- **Barra lateral:** grave o relato pelo microfone ou envie vários prints e áudios.
+- **Campo do chat:** arraste arquivos, anexe pelo clipe ou grave pelo microfone.
+
+Cada evidência ganha um ID (`E01`, `E02`…) e o hash SHA-256 do arquivo, e vira um cartão:
+- **Print:** imagem ao lado da leitura do Gemini, com a confiança declarada.
+- **Áudio:** forma de onda, player e transcrição por trechos. Clicar num trecho leva o player para aquele momento e destaca o trecho na forma de onda.
+
+Se você mandar só um áudio, sem texto, o pedido feito no áudio vira a pergunta. O que entra pelo chat continua valendo para as próximas perguntas, até você clicar em **Limpar sessão e cache**. Cada resposta mostra quais evidências foram consideradas, além do tempo, dos turnos e dos tokens. **Ver raciocínio e fontes** mostra cada chamada ao catálogo com os argumentos e o resultado. O acordeão **Evidências** lista tudo o que entrou na sessão, com hash. Se o print e o áudio citarem valores diferentes, a topbar muda para **Divergência** e um aviso aparece abaixo do título. Se a API falhar, o botão **Tentar novamente** reenvia a pergunta. O botão **Relatório** baixa a investigação em Markdown.
 
 ### Pipeline de ingestão (v0.2)
 
