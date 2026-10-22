@@ -1,3 +1,7 @@
 google-genai
 pydantic>=2.0
 python-dotenv
+pillow
+numpy
+openai-whisper
+streamlit
